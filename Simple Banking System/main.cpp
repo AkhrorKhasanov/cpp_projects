@@ -160,6 +160,29 @@ void deposit(double dp, string loggedUserIn)
     }
 }
 
+void withdraw(double wt, string loggedInUser)
+{
+
+    vector<User> users = loadUsers();
+    for (int i = 0; i < users.size(); i++)
+    {
+        if (users[i].username == loggedInUser)
+        {
+            if (users[i].balance >= wt)
+            {
+                users[i].balance -= wt;
+                saveAllUsers(users);
+                cout << "Withdraw was successfull" << endl;
+            }
+            else
+            {
+                cout << "There is no enough money" << endl;
+            }
+            break;
+        }
+    }
+}
+
 int main()
 {
     int choice;
@@ -190,13 +213,13 @@ int main()
                         cin >> dp;
                         deposit(dp, loggedInUser);
                     }
-                    // else if (userChoice == 2)
-                    // {
-                    //     int wt;
-                    //     cout << "Enter your withdraw: ";
-                    //     cin >> wt;
-                    //     withdraw(wt);
-                    // }
+                    else if (userChoice == 2)
+                    {
+                        int wt;
+                        cout << "Enter your withdraw: ";
+                        cin >> wt;
+                        withdraw(wt, loggedInUser);
+                    }
                     else if (userChoice == 3)
                     {
                         changePassword(loggedInUser);
